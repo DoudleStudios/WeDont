@@ -6,5 +6,6 @@ struct Entity
     float Radius;
 
     virtual ~Entity() = default;
-    virtual void Update(float deltaTime) = NULL;
+    virtual void update(float deltaTime) = NULL;
+    virtual void draw(SDL_Renderer *) = NULL;
 };

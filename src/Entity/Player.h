@@ -5,5 +5,6 @@ struct Player: public Entity
     float Speed;
 
     virtual ~Player() = default;
-    virtual void Update(float deltaTime) override;
+    virtual void update(float deltaTime) override;
+    virtual void draw(SDL_Renderer *) override;
 };

@@ -13,14 +13,12 @@ int main()
     SDL_Surface *surface = SDL_GetWindowSurface(wnd);
 
     Player *player = new Player;
-    uint8_t gray = 0;
 
     bool running = true;
     while (running)
     {
-        player->Update(0);
-        gray++;
-        SDL_FillRect(surface, NULL, SDL_MapRGB(surface->format, gray, gray, gray));
+        SDL_FillRect(surface, NULL, 0x404040);
+        player->update(0);
         SDL_UpdateWindowSurface(wnd);
 
         SDL_Event e;
