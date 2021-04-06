@@ -2,20 +2,27 @@
 #include <SDL.h>
 #include <cstdio>
 
+#include "Entity/Player.h"
+
 int main()
 {
     if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
         return 1;
     
-    SDL_Window *wnd = SDL_CreateWindow("We Don't", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 0, 0, SDL_WINDOW_SHOWN | SDL_WINDOW_FULLSCREEN);
+    SDL_Window *wnd = SDL_CreateWindow("We Don't", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1280, 720, SDL_WINDOW_SHOWN);
     SDL_Surface *surface = SDL_GetWindowSurface(wnd);
 
-    SDL_FillRect(surface, NULL, SDL_MapRGB(surface->format, 0x00, 0xFF, 0x00));
-    SDL_UpdateWindowSurface(wnd);
+    Player *player = new Player;
+    uint8_t gray = 0;
 
     bool running = true;
     while (running)
     {
+        player->Update(0);
+        gray++;
+        SDL_FillRect(surface, NULL, SDL_MapRGB(surface->format, gray, gray, gray));
+        SDL_UpdateWindowSurface(wnd);
+
         SDL_Event e;
         while (SDL_PollEvent(&e))
             switch (e.type)
@@ -28,6 +35,8 @@ int main()
                     running = false;
                 break;
             }
+
+        SDL_Delay(50);
     }
     
     SDL_DestroyWindow(wnd);
